@@ -49,31 +49,6 @@
         .text-center {
             text-align: center;
         }
-
-        .btn {
-            color: #fff;
-            font-size: 24px;
-            padding: 10px 120px;
-            border: 1px solid #f8f8f8;
-            border-radius: 10px;
-        }
-
-        .btn:hover {
-            background: #9B59B6;
-            border: 0 none;
-            color: #fff;
-        }
-
-        .btn:visited {
-            color: #fff;
-            border: 1px solid #f8f8f8;
-        }
-
-        .btn:active {
-            background: #1BA1E2;
-            border: 0 none;
-            color: #fff;
-        }
     </style>
 </head>
 
@@ -88,11 +63,7 @@
             <p id="elapseClock"></p></div>
 
         <div class="text-center" style="margin-top: 20px;height:20px;font:bold 18px 宋体;">
-            <p id="rainbowWords">给宝贝儿的惊喜</p>
-        </div>
-
-        <div class="text-center" style="margin-top: 120px;">
-            <a class="btn">甜蜜双击</a>
+            <p id="rainbowWords">点击屏幕有惊喜哦</p>
         </div>
     </div>
 </div>
@@ -122,7 +93,7 @@
                 getRainbow();
             }, 20200)
 
-            $('.btn').click(function () {
+            $('html').click(function () {
                 getRainbow();
             });
 
@@ -153,7 +124,11 @@
         function getRainbow() {
             var htmlobj = $.ajax({url: "https://api.shadiao.pro/chp", async: false});
             var text = htmlobj.responseJSON.data.text;
-            handle(text);
+            if (text.length > 52) {
+                getRainbow()
+            } else {
+                handle(text);
+            }
         }
 
         function handle(data) {
